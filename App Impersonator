@@ -1,0 +1,39 @@
+CREATE TABLE warriors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    level INTEGER,
+    class TEXT);
+    
+INSERT INTO warriors (name, level, class) VALUES ("leroy jenkins", 5, "paladin");
+INSERT INTO warriors (name, level, class) VALUES ("ninja", 4, "rogue");
+INSERT INTO warriors (name, level, class) VALUES ("dr lupo", 5, "wizard");
+INSERT INTO warriors (name, level, class) VALUES ("tim tatman", 3, "tank");
+
+ALTER TABLE warriors ADD title TEXT;
+
+UPDATE warriors SET title = "master" WHERE id = 1;
+UPDATE warriors SET title = "apprentice" WHERE id = 2;
+UPDATE warriors SET title = "grandmaster" WHERE id = 3;
+UPDATE warriors SET title = "intermediate" WHERE id = 4;
+
+SELECT * FROM warriors;
+
+INSERT INTO warriors (name, level, class, title) VALUES ("dr disrespect", 5, "dps", "master");
+
+SELECT * FROM warriors;
+
+ALTER TABLE warriors ADD days_played INTEGER;
+
+SELECT * FROM warriors;
+
+UPDATE warriors SET days_played = 2 WHERE id = 1;
+UPDATE warriors SET days_played = 3 WHERE id = 2;
+UPDATE warriors SET days_played = 1 WHERE id = 3;
+UPDATE warriors SET days_played = 4 WHERE id = 4;
+UPDATE warriors SET days_played = 3 WHERE id = 5;
+
+SELECT * FROM warriors;
+
+DELETE FROM warriors WHERE id = 1;
+
+SELECT * FROM warriors;
