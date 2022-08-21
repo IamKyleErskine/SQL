@@ -1,4 +1,5 @@
-/* Put your data in here and query it! */
+# With this code I input data from an online open resource table and then ordered the data to answer a few questions I had.
+
 CREATE TABLE pokemon(
   Number     INTEGER,
   Name       TEXT PRIMARY KEY,
@@ -827,7 +828,6 @@ FROM pokemon;
 
 SELECT AVG(Sp_Atk) 
 FROM pokemon;
-
 
 SELECT AVG(Sp_Def) 
 FROM pokemon;
