@@ -1,3 +1,5 @@
+# With this code I wanted to make a computer parts store log for the inventory kept in the store.
+
 CREATE TABLE Erskine_Computer_Parts (
 id INTEGER PRIMARY KEY,
 company TEXT,
@@ -50,6 +52,7 @@ INSERT INTO Erskine_Computer_Parts VALUES
 (39, "Rosewill", "ROCC", "Fan", 20, 10, "new", 8),
 (40, "Enermax", "ETSN31", "Fan", 29, 10, "new", 8);
 
+# Then I wanted to quantify the data to find the number of highest priced items. I used two methods to find similar data as shown below.
 SELECT COUNT(*) AS "Total Items Over $100" 
     FROM Erskine_Computer_Parts
     WHERE cost >100;
