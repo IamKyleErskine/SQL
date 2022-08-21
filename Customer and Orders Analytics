@@ -1,48 +1,45 @@
+#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data.
+
+#First I familiarized myself with some of the data and how the tables were setup within the database.
+
 SELECT * from BIT_DB.customers 
     LIMIT 20;
 
 SELECT * FROM BIT_DB.JanSales 
     LIMIT 20;
 
-SELECT Count(*) FROM BIT_DB.JanSales;
+#Then I began querying the data to answer specific questions.
 
+#1. How many orders were placed in January?
+SELECT Count(*) FROM BIT_DB.JanSales;
+#A: 9723
+
+#2. How many of those orders were for an iPhone?
 SELECT Count(*) FROM BIT_DB.JanSales 
     WHERE product = "iPhone";
+#A: 379
 
+#3. Which product was the cheapest sold in January, and for what price?
 SELECT distinct MIN(price), product FROM BIT_DB.JanSales;
+#A: AAA Batteries (4Pack) for 2.99
 
+#4. What is the total revenue for each product sold in January?
 SELECT SUM(Quantity)*price as Revenue, product FROM BIT_DB.JanSales
     GROUP BY product;
     
+#5. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?    
 SELECT SUM(Quantity), product, SUM(Quantity)*price as Revenue FROM BIT_DB.FebSales    
     WHERE location = '548 Lincoln St, Seattle, WA 98101'
     GROUP BY product;
     
-SELECT * FROM BIT_DB.FebSales
-    WHERE location = '548 Lincoln St, Seattle, WA 98101';
-    
+#6. In February, how many customers ordered more than 2 products at a time, and what was the average amount spent for those customers?     
 SELECT COUNT(cust.acctnum), AVG(quantity*price) FROM BIT_DB.FebSales FEB
     LEFT JOIN BIT_DB.customers Cust
     ON FEB.orderid = Cust.order_id
     WHERE Feb.Quantity>2;
+    #A: 890 customers with an avg of 4.17 spent
     
-SELECT orderdate FROM BIT_DB.FebSales
-    WHERE orderdate BETWEEN '02/13/19 00:00' AND '02/18/19 00:00';
-    
-SELECT location FROM BIT_DB.FebSales
-    WHERE orderdate = '02/18/19 01:35';
-    
-SELECT SUM(quantity) FROM BIT_DB.FebSales
-    WHERE orderdate like '02/18/19%';
-    
-SELECT orderdate FROM BIT_DB.FebSales;
-
-SELECT distinct Product FROM BIT_DB.FebSales
-    WHERE Product LIKE '%Batteries%';
-    
-SELECT distinct Product, Price FROM BIT_DB.FebSales
-    WHERE Price LIKE '%.99';
-    
+#7. List all of the products sold in Los Angeles in February and include how many of each were sold.   
 SELECT Product, SUM(quantity) FROM BIT_DB.FebSales
     WHERE location LIKE '%Los Angeles%'
     GROUP BY Product;
