@@ -44,3 +44,13 @@ SELECT artist_name, track_name, MAX(loudness) FROM BIT_DB.SpotifyData;
 
 SELECT artist_name, track_name, loudness FROM BIT_DB.SpotifyData
   ORDER BY loudness desc;
+
+#Lastly I wanted to determine the artists popularity. For this I used a CTE.
+WITH average_popularity_CTE AS (
+  SELECT s.artist_name, AVG(s.popularity) AS average_popularity FROM SpotifyData s
+  GROUP BY s.artist_name)
+  
+SELECT artist_name, average_popularity FROM average_popularity_CTE
+  ORDER BY average_popularity desc;
+  
+  
