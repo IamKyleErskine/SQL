@@ -1,0 +1,63 @@
+--Project goal: 
+--Create a store database selling one type of thing that your store specializes in. 
+--You should have a table for your store with at least 5 columns for the kind of data you think you'd need to store. 
+--You should sell at least 15 items, and use select statements to order your items by price and show at least one statistic about the items. 
+
+CREATE TABLE goalie_store (
+    id INTEGER PRIMARY KEY, 
+    item_name TEXT,
+    manufacturer TEXT,
+    color TEXT,
+    price INTEGER,
+    quantity INTEGER,
+    size INTEGER);
+    
+INSERT INTO goalie_store VALUES
+    (1, "Ritual G6 E+ Leg Pads", "Warrior", "Red", 899.99, 3, "XL"),
+    (2, "Ritual GT2 Pro Leg Pads", "Warrior", "Blue", 1099.98, 3, "XL"),
+    (3, "Ritual GT2 Leg Pads", "Warrior", "White", 719.98, 3, "XL"),
+    (4, "Ventus SLR3 Pro Leg Pads", "Vaughn", "Red", 999.99, 3, "XL"),
+    (5, "Ritual G6 E+ Glove", "Warrior", "Red", 279.99, 3, "XL"),
+    (6, "Supreme M5 Pro Glove", "Bauer", "Blue", 289.99, 3, "XL"),
+    (7, "Vapor Hyperlite Pro Glove", "Bauer", "Red", 549.99, 3, "XL"),
+    (8, "Ritual G6.1 E+", "Warrior", "Red", 279.99, 3, "XL"),
+    (9, "Supreme M5 Pro Blocker", "Bauer", "Blue", 269.99, 3, "XL"),
+    (10, "Ritual G6 E+ Blocker", "Warrior", "Red", 269.99, 3, "XL"),
+    (11, "Supreme Mach Blocker", "Bauer", "Black", 449.99, 3, "XL"),
+    (12, "G-Netik X5 Blocker", "Brian's", "Red", 269.99, 3, "XL"),
+    (13, "GSX Chest & Arm Protector", "Bauer", "Black", 249.99, 3, "XL"),
+    (14, "Supreme Mach Chest & Arm Protector", "Bauer", "Grey", 599.99, 3, "XL"),
+    (15, "Elite Chest & Arm Protector", "Bauer", "Black", 349.99, 3, "XL");
+  
+  
+--Display the entire database for accuracy.
+SELECT * FROM goalie_store;
+    
+--Time to clean this up some. Let's organize it by price.
+SELECT * FROM goalie_store
+   ORDER BY price desc;
+
+--Now let's see how many items we sell from specific manufacturers. Let's start with Bauer.
+SELECT COUNT(*) FROM goalie_store
+    WHERE manufacturer = "Bauer";
+    
+--We know that red is a popular color in our area. How many items do we have that are red?
+SELECT COUNT(*) FROM goalie_store
+    WHERE color = "Red";
+    
+--Now how many of those red items are manufactured by Bauer?
+SELECT COUNT(*) FROM goalie_store
+    WHERE color = "Red"
+    AND manufacturer = "Bauer";
+    
+--Well that told us how many but didn't tell us the item or it's price if a customer would ask for the information. Let's figure that out now.
+SELECT item_name, price FROM goalie_store
+    WHERE color = "Red" 
+    AND manufacturer = "Bauer";
+    
+--How many items do we have in total available for sale?
+SELECT SUM(quantity) FROM goalie_store;
+
+--Now how many of those items cost more than $500?
+SELECT SUM(quantity) FROM goalie_store
+    WHERE price > 500;
