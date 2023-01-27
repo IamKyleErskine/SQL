@@ -1,0 +1,55 @@
+--In this syntax I explore data about the world population as of 2020.
+
+--Countries and dependent territories, 2020
+--Data adapted from
+--http://www.worldometers.info/world-population/population-by-country/
+--Does not include rows which had "N.A." values, so some territories are missing.
+
+--First let's see the average total population of all the countries and round it to the nearest whole number.
+SELECT 
+    ROUND(AVG(population))
+FROM countries;
+
+--Now how about we see what countries have a popluation below that average.
+SELECT 
+    name
+FROM countries
+    WHERE population < 38774455;
+    
+--That's quite a list, let's count how many there are.
+SELECT 
+    COUNT(name)
+FROM countries
+    WHERE population < 38774455;
+    
+--Now how many countries are above the average?
+SELECT 
+    COUNT(name)
+FROM countries
+    WHERE population > 38774455;
+    
+--Which country has the largest population?
+SELECT 
+    name, 
+    MAX(population)
+FROM countries;
+
+--And which country has the lowest population?
+SELECT
+    name, 
+    MIN(population)
+FROM countries;
+
+--How many natives are adding to the highest populated country?
+SELECT
+    name,
+    MAX(population),
+    fertility_rate
+FROM countries;
+
+--And the lowest?
+SELECT
+    name, 
+    MIN(population),
+    fertility_rate
+FROM countries;
