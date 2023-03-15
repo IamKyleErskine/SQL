@@ -1,0 +1,48 @@
+--In this project I made a small dataset that would be the basics behind character logs for a videogame.--
+
+CREATE TABLE warriors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    level INTEGER,
+    class TEXT);
+    
+INSERT INTO warriors (name, level, class) VALUES ("leroy jenkins", 5, "paladin");
+INSERT INTO warriors (name, level, class) VALUES ("ninja", 4, "rogue");
+INSERT INTO warriors (name, level, class) VALUES ("dr lupo", 5, "wizard");
+INSERT INTO warriors (name, level, class) VALUES ("tim tatman", 3, "tank");
+
+--Then we altered the data to include more detail.--
+ALTER TABLE warriors ADD title TEXT;
+
+UPDATE warriors SET title = "master" WHERE id = 1;
+UPDATE warriors SET title = "apprentice" WHERE id = 2;
+UPDATE warriors SET title = "grandmaster" WHERE id = 3;
+UPDATE warriors SET title = "intermediate" WHERE id = 4;
+
+--Quick check to make sure everything is updated correctly.--
+SELECT * FROM warriors;
+
+--Look we have a new player! Their data is input as the most current.--
+INSERT INTO warriors (name, level, class, title) VALUES ("dr disrespect", 5, "dps", "master");
+
+SELECT * FROM warriors;
+
+--Let's add another stat to track within our videogame. This one we can use with advertisers so we can get paid for the time we've put into this project since it
+was released for free.--
+ALTER TABLE warriors ADD days_played INTEGER;
+
+SELECT * FROM warriors;
+
+UPDATE warriors SET days_played = 2 WHERE id = 1;
+UPDATE warriors SET days_played = 3 WHERE id = 2;
+UPDATE warriors SET days_played = 1 WHERE id = 3;
+UPDATE warriors SET days_played = 4 WHERE id = 4;
+UPDATE warriors SET days_played = 3 WHERE id = 5;
+
+--Double check again to make sure everything was updated accordingly.--
+SELECT * FROM warriors;
+
+--As is normal with the eb and flow of videogames we've had our first player drop off and quit the game.--
+DELETE FROM warriors WHERE id = 1;
+
+SELECT * FROM warriors;
